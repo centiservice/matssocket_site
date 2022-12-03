@@ -15,8 +15,8 @@ header:
     - label: "pub.dev"
       url: "https://pub.dev/packages/matssocket"
 excerpt: >
-  Message-based Interservice Communication made easy!<br />
-  <small><a href="https://github.com/mmistakes/minimal-mistakes/releases/tag/4.24.0"></a></small>
+  Mats<sup>3</sup> to the client! Asynchronous RPC using websocket and messages end to end.<br />
+  <small>Java MatsSocketServer API, with client libraries in JavaScript/TS and Dart/Flutter.</small>
 feature_row:
   - title: "Mats<sup>3</sup> over WebSocket"
     excerpt: "Asynchronous, lightweight, bidirectional client-server over persistent websocket connection."
