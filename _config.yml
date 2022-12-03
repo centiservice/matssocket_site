@@ -22,6 +22,9 @@ github_username: stolsvik
 minimal_mistakes_skin: dark
 search: true
 
+# Localhost development port when using 'serve'
+port: 4001
+
 # EndreXY 2022-08-07: Based on https://github.com/github/pages-gem/issues/399#issuecomment-301827749
 # .. to fix the problem "GitHub Metadata: No GitHub API authentication could be found.
 #     Some fields may be missing or have incorrect data."
