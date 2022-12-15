@@ -57,6 +57,13 @@ include:
 exclude:
   - EndreXY*
 
+# Collections
+collections:
+  docs:
+    output: true
+    permalink: /:collection/:path/
+
+
 # Plugins (previously gems:)
 plugins:
   - jekyll-paginate
@@ -109,6 +116,18 @@ defaults:
     values:
       layout: single
       author_profile: false
+  # _docs
+  - scope:
+      path: ""
+      type: docs
+    values:
+      layout: single
+      read_time: false
+      author_profile: false
+      share: false
+      comments: false
+      sidebar:
+        nav: "docs"
 
 category_archive:
   type: liquid

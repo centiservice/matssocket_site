@@ -3,6 +3,16 @@ permalink: /about/
 title: "About"
 ---
 
-Tempor velit sint sunt ipsum tempor enim ad qui ullamco. Est dolore anim ad velit duis dolore minim sunt aliquip amet commodo labore. Ut eu pariatur aute ea aute excepteur laborum. Esse ea esse excepteur minim mollit qui cillum excepteur ex dolore magna. Labore deserunt fugiat incididunt incididunt sint ea. Consequat dolore aute laboris quis proident quis non et est consectetur ex eiusmod sit culpa.
+MatsSocket brings the power of asynchronous messaging all the way out to the client - assuming that the client is
+written in JavaScript, TypeScript, Dart or Flutter!
 
-Cupidatat ea do et in excepteur in. Ad nostrud ut est esse eu duis ea sunt eiusmod. Aliquip tempor veniam sint elit fugiat. Velit incididunt laboris amet incididunt labore dolore irure velit excepteur commodo deserunt laborum. Consectetur eu fugiat veniam veniam Lorem labore magna eiusmod. Ea occaecat reprehenderit pariatur consectetur minim labore ut aliquip.
+While it is certainly possible to use Mats with asynchronous HTTP implementations, using e.g. Servlet's or Spring's
+async modes, the communication is still over synchronous TCP connections. If the connection or the server temporarily
+goes down, you've lost any outstanding requests. Also, you have the overhead of each HTTP request and response with all
+their headers. Also, sending messages from the server to the client isn't easy.
+
+These issues and more, are in stark contrast to the reliability and nimbleness of Mats.
+
+Thus, MatsSocket was born. 
+
+

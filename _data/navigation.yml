@@ -9,5 +9,18 @@ main:
 #    url: /categories/
 #  - title: "Tags"
 #    url: /tags/
+  - title: "License"
+    url: /license/
   - title: "About"
     url: /about/
+
+# documentation links
+docs:
+  - title: Documentation
+    url: /docs/
+  - title: Walkthrough
+    children:
+      - title: "Mats<sup>3</sup> over WebSocket"
+        url: /docs/mats3-over-websocket/
+      - title: "MatsSocket Clients"
+        url: /docs/matssocket-clients/
