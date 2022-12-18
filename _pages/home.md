@@ -4,7 +4,6 @@ permalink: /
 hidden: true
 header:
   overlay_color: "#F7420A"
-  # overlay_image: /assets/images/mm-home-page-feature.jpg
   actions:
     - label: "<i class='fab fa-github'></i> GitHub"
       url: "https://github.com/centiservice/matssocket"
