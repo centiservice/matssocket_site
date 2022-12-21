@@ -7,4 +7,6 @@ last_modified_at: 2022-12-15T22:38
 classes: wide
 ---
 
+# WIP
+
 MatsSocket is Mats<sup>3</sup> over WebSocket to the client.

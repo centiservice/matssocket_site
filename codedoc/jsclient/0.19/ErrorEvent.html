@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Class: ErrorEvent</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Class: ErrorEvent</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2><span class="attribs"><span class="type-signature"></span></span>ErrorEvent<span class="signature">(type, message, object)</span><span class="type-signature"></span></h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+    
+
+    
+    <h4 class="name" id="ErrorEvent"><span class="type-signature"></span>new ErrorEvent<span class="signature">(type, message, object)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    The Event object supplied to listeners added via MatsSocket#addErrorEventListener().
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>type</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>message</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>object</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ErrorEvent.js.html">ErrorEvent.js</a>, <a href="ErrorEvent.js.html#line11">line 11</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="message"><span class="type-signature"></span>message<span class="type-signature"> :string</span></h4>
+
+
+
+
+<div class="description">
+    The error message
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">string</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ErrorEvent.js.html">ErrorEvent.js</a>, <a href="ErrorEvent.js.html#line24">line 24</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="reference"><span class="type-signature"></span>reference<span class="type-signature"> :Object</span></h4>
+
+
+
+
+<div class="description">
+    Some errors supply a relevant object: Event for WebSocket errors, The attempted processed MatsSocket Envelope
+when envelope processing fails, or the caught Error in a try-catch (typically when invoking event listeners).
+<b>For submitting errors back to the home server, check out <a href="ErrorEvent.html#referenceAsString">ErrorEvent#referenceAsString</a>.</b>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ErrorEvent.js.html">ErrorEvent.js</a>, <a href="ErrorEvent.js.html#line33">line 33</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="type"><span class="type-signature"></span>type<span class="type-signature"> :string</span></h4>
+
+
+
+
+<div class="description">
+    Type of error - describes the situation where the error occurred. Currently has no event-type enum.
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">string</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ErrorEvent.js.html">ErrorEvent.js</a>, <a href="ErrorEvent.js.html#line17">line 17</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="referenceAsString"><span class="type-signature"></span>referenceAsString<span class="signature">(maxLength)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Makes a string (<b>chopped the specified max number of characters, default 1024 chars</b>) out of the
+<a href="ErrorEvent.html#reference">ErrorEvent#reference</a> Object, which might be useful if you want to send this back over HTTP - consider
+<code>encodeURIComponent(referenceAsString)</code> if you want to send it over the URL. First tries to use
+<code>JSON.stringify(reference)</code>, failing that, it uses <code>""+reference</code>. Then chops to max
+1024, using "..." to denote the chop.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>maxLength</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the max number of characters that will be returned, with any chop denoted by "...".</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ErrorEvent.js.html">ErrorEvent.js</a>, <a href="ErrorEvent.js.html#line45">line 45</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AuthorizationRequiredEvent.html">AuthorizationRequiredEvent</a></li><li><a href="ConnectionEvent.html">ConnectionEvent</a></li><li><a href="DebugInformation.html">DebugInformation</a></li><li><a href="ErrorEvent.html">ErrorEvent</a></li><li><a href="InitiationProcessedEvent.html">InitiationProcessedEvent</a></li><li><a href="MatsSocket.html">MatsSocket</a></li><li><a href="MessageEvent.html">MessageEvent</a></li><li><a href="PingPong.html">PingPong</a></li><li><a href="ReceivedEvent.html">ReceivedEvent</a></li><li><a href="SubscriptionEvent.html">SubscriptionEvent</a></li></ul><h3>Global</h3><ul><li><a href="global.html#AuthorizationRequiredEventType">AuthorizationRequiredEventType</a></li><li><a href="global.html#ConnectionEventType">ConnectionEventType</a></li><li><a href="global.html#ConnectionState">ConnectionState</a></li><li><a href="global.html#DebugOption">DebugOption</a></li><li><a href="global.html#InitiationProcessedEventType">InitiationProcessedEventType</a></li><li><a href="global.html#MatsSocketCloseCodes">MatsSocketCloseCodes</a></li><li><a href="global.html#MessageEventType">MessageEventType</a></li><li><a href="global.html#MessageType">MessageType</a></li><li><a href="global.html#ReceivedEventType">ReceivedEventType</a></li><li><a href="global.html#SubscriptionEventType">SubscriptionEventType</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Wed Dec 21 2022 12:35:09 GMT+0100 (Central European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

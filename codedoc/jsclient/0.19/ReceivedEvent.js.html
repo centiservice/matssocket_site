@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: ReceivedEvent.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: ReceivedEvent.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>export { ReceivedEvent, ReceivedEventType }
+
+/**
+ * Message Received on Server event: "acknowledge" or "negative acknowledge" - these are the events which the
+ * returned Promise of a send(..) is settled with (i.e. then() and catch()), and which
+ * {@link MatsSocket#request request}'s receivedCallback function are invoked with.
+ *
+ * @class
+ */
+function ReceivedEvent(type, traceId, sentTimestamp, receivedTimestamp, roundTripMillis, description) {
+    /**
+     * Values are from {@link ReceivedEventType}: Type of received event, either {@link ReceivedEventType#ACK "ack"},
+     * {@link ReceivedEventType#NACK "nack"} - &lt;b>or {@link ReceivedEventType#SESSION_CLOSED "sessionclosed"} if the
+     * session was closed with outstanding initiations and MatsSocket therefore "clears out" these initiations.&lt;/b>
+     *s
+     * @type {string}
+     */
+    this.type = type;
+
+    /**
+     * TraceId for this call / message.
+     *
+     * @type {string}
+     */
+    this.traceId = traceId;
+
+    /**
+     * Millis-since-epoch when the message was sent from the Client.
+     *
+     * @type {number}
+     */
+    this.sentTimestamp = sentTimestamp;
+
+    /**
+     * Millis-since-epoch when the ACK or NACK was received on the Client, millis-since-epoch.
+     *
+     * @type {number}
+     */
+    this.receivedTimestamp = receivedTimestamp;
+
+    /**
+     * Round-trip time in milliseconds from Initiation of flow (send, request, requestReplyTo) to Received
+     * acknowledgement (ACK/NACK) was received, basically &lt;code>{@link #receivedTimestamp}
+     * - {@link #sentTimestamp}&lt;/code>, but depending on the browser/runtime, you might get higher resolution
+     * than integer milliseconds (i.e. fractions of milliseconds, a floating point number) - it depends on
+     * the resolution of &lt;code>performance.now()&lt;/code>.
+     * &lt;p/>
+     * Notice that Received-events might be de-prioritized on the Server side (batched up, with micro-delays
+     * to get multiple into the same batch), so this number should not be taken as the "ping time".
+     *
+     * @type {number}
+     */
+    this.roundTripMillis = roundTripMillis;
+
+    /**
+     * Sometimes, typically on Server NACKs (e.g. targetting non-existing Endpoint), the Server supplies a
+     * description to why this was no good.
+     *
+     * @type {string}
+     */
+    this.description = description;
+}
+
+/**
+ * Types of {@link ReceivedEvent}.
+ *
+ * @enum {string}
+ * @readonly
+ */
+const ReceivedEventType = {
+    /**
+     * If the Server-side MatsSocketEndpoint/Terminator accepted the message for handling (and if relevant,
+     * forwarded it to the Mats fabric). The returned Promise of send() is &lt;i>resolved&lt;/i> with this type of event.
+     * The 'receivedCallback' of a request() will get both "ack" and {@link #NACK "nack"}, thus must check on
+     * the type if it makes a difference.
+     */
+    ACK: "ack",
+
+    /**
+     * If the Server-side MatsSocketEndpoint/Terminator dit NOT accept the message, either explicitly with
+     * context.deny(), or by failing with Exception. The returned Promise of send() is &lt;i>rejected&lt;/i> with this
+     * type of event. The 'receivedCallback' of a request() will get both "nack" and {@link #ACK "ack"}, thus must
+     * check on the type if it makes a difference.
+     * &lt;p/>
+     * Notice that a for a Client-initiated Request which is insta-rejected in the incomingHandler by invocation of
+     * context.reject(..), this implies &lt;i>acknowledge&lt;/i> of the &lt;i>reception&lt;/i> of the message, but &lt;i>reject&lt;/i>
+     * as with regard to the &lt;/i>reply&lt;/i> (the Promise returned from request(..)).
+     */
+    NACK: "nack",
+
+    /**
+     * "Synthetic" event in that it is not a message from Server: A Client-to-Server
+     * {@link MatsSocket#request() Request} was not ACKed or NACKed by the server within the
+     * {@link MatsSocket#requestTimeoutMillis default request timeout} - or a specific timeout specified in the request
+     * invocation. In these situations, any nack- or receivedCallback will be invoked with a {@link ReceivedEvent}
+     * of this type.
+     */
+    TIMEOUT: "timeout",
+
+    /**
+     * "Synthetic" event in that it is not a message from Server: This only happens if the MatsSocketSession is
+     * closed with outstanding Initiations not yet Received on Server. In these situations, any nack- or
+     * receivedCallback will be invoked with a {@link ReceivedEvent} of this type.
+     */
+    SESSION_CLOSED: "sessionclosed"
+};
+Object.freeze(ReceivedEventType);
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AuthorizationRequiredEvent.html">AuthorizationRequiredEvent</a></li><li><a href="ConnectionEvent.html">ConnectionEvent</a></li><li><a href="DebugInformation.html">DebugInformation</a></li><li><a href="ErrorEvent.html">ErrorEvent</a></li><li><a href="InitiationProcessedEvent.html">InitiationProcessedEvent</a></li><li><a href="MatsSocket.html">MatsSocket</a></li><li><a href="MessageEvent.html">MessageEvent</a></li><li><a href="PingPong.html">PingPong</a></li><li><a href="ReceivedEvent.html">ReceivedEvent</a></li><li><a href="SubscriptionEvent.html">SubscriptionEvent</a></li></ul><h3>Global</h3><ul><li><a href="global.html#AuthorizationRequiredEventType">AuthorizationRequiredEventType</a></li><li><a href="global.html#ConnectionEventType">ConnectionEventType</a></li><li><a href="global.html#ConnectionState">ConnectionState</a></li><li><a href="global.html#DebugOption">DebugOption</a></li><li><a href="global.html#InitiationProcessedEventType">InitiationProcessedEventType</a></li><li><a href="global.html#MatsSocketCloseCodes">MatsSocketCloseCodes</a></li><li><a href="global.html#MessageEventType">MessageEventType</a></li><li><a href="global.html#MessageType">MessageType</a></li><li><a href="global.html#ReceivedEventType">ReceivedEventType</a></li><li><a href="global.html#SubscriptionEventType">SubscriptionEventType</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Wed Dec 21 2022 12:35:09 GMT+0100 (Central European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

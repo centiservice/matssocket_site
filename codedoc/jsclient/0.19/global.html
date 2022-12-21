@@ -1,0 +1,3806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Global</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Global</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2></h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+        
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="AuthorizationRequiredEventType"><span class="type-signature">(constant) </span>AuthorizationRequiredEventType<span class="type-signature"> :string</span></h4>
+
+
+
+
+<div class="description">
+    Type of <a href="AuthorizationRequiredEvent.html">AuthorizationRequiredEvent</a>.
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">string</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>NOT_PRESENT</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Initial state, if auth not already set by app.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>EXPIRED</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The authentication is expired - note that this might well still be in the future,
+but the "slack" left before expiration is not long enough.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>REAUTHENTICATE</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The server has requested that the app provides fresh auth to proceed - this needs to be fully fresh, even
+though there might still be "slack" enough left on the current authorization to proceed. (The server side
+might want the full expiry to proceed, or wants to ensure that the app can still produce new auth - i.e.
+it might suspect that the current authentication session has been invalidated, and need proof that the app
+can still produce new authorizations/tokens).</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="AuthorizationRequiredEvent.js.html">AuthorizationRequiredEvent.js</a>, <a href="AuthorizationRequiredEvent.js.html#line34">line 34</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="ConnectionEventType"><span class="type-signature">(constant) </span>ConnectionEventType<span class="type-signature"> :string</span></h4>
+
+
+
+
+<div class="description">
+    The event types of <a href="ConnectionEvent.html">ConnectionEvent</a> - four of the event types are state-transitions into different states
+of <a href="global.html#ConnectionState">ConnectionState</a>.
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">string</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>CONNECTING</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">State, and fires as ConnectionEvent when we transition into this state, which is when the WebSocket is literally trying to connect.
+This is between <code>new WebSocket(url)</code> (or the <a href="MatsSocket.html#preconnectoperation">"PreConnectOperation"</a> if configured),
+and either webSocket.onopen or webSocket.onclose is fired, or countdown reaches 0. If webSocket.onopen,
+we transition into <a href="global.html#ConnectionEventType#.CONNECTED">ConnectionEventType.CONNECTED</a>, if webSocket.onclose, we transition into
+<a href="global.html#ConnectionEventType#.WAITING">ConnectionEventType.WAITING</a>. If we reach countdown 0 while in CONNECTING, we will "re-transition" to the same state, and
+thus get one more event of CONNECTING.
+<p/>
+User Info Tip: Show a info-box, stating "Connecting! <4.0 seconds..>", countdown in "grayed out" style, box is
+some neutral information color, e.g. yellow (fading over to this color if already red or orange due to
+<a href="global.html#ConnectionEventType#.CONNECTION_ERROR">ConnectionEventType.CONNECTION_ERROR</a> or <a href="global.html#ConnectionEventType#.LOST_CONNECTION">ConnectionEventType.LOST_CONNECTION</a>).
+Each time it transitions into CONNECTING, it will start a new countdown. Let's say it starts from say 4
+seconds: If this connection attempt fails after 1 second, it will transition into WAITING and continue the
+countdown with 3 seconds remaining.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>WAITING</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">State, and fires as ConnectionEvent when we transition into this state, which is when <a href="global.html#ConnectionEventType#.CONNECTING">ConnectionEventType.CONNECTING</a> fails.
+The only transition out of this state is <a href="global.html#ConnectionEventType#.CONNECTING">ConnectionEventType.CONNECTING</a>, when the <a href="global.html#ConnectionEventType#.COUNTDOWN">ConnectionEventType.COUNTDOWN</a> reaches 0.
+<p/>
+Notice that the <a href="ConnectionEvent.html">ConnectionEvent</a> contains the Event that came with webSocket.close (while CONNECTING).
+<p/>
+User Info Tip: Show a info-box, stating "Waiting! <2.9 seconds..>", countdown in normal visibility, box is
+some neutral information color, e.g. yellow (keeping the box color fading if in progress).
+It will come into this state from <a href="global.html#ConnectionEventType#.CONNECTING">ConnectionEventType.CONNECTING</a>, and have the time remaining from the initial countdown.
+So if the attempt countdown started from 4 seconds, and it took 1 second before the connection attempt failed,
+then there will be 3 seconds left in WAITING state.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>CONNECTED</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">State, and fires as ConnectionEvent when we transition into this state, which is when WebSocket.onopen is fired.
+Notice that the MatsSocket is still not fully established, as we have not yet exchanged HELLO and WELCOME -
+the MatsSocket is fully established at <a href="global.html#ConnectionEventType#.SESSION_ESTABLISHED">ConnectionEventType.SESSION_ESTABLISHED</a>.
+<p/>
+Notice that the <a href="ConnectionEvent.html">ConnectionEvent</a> contains the WebSocket 'onopen' Event that was issued when
+the WebSocket opened.
+<p/>
+User Info Tip: Show a info-box, stating "Connected!", happy-color, e.g. green, with no countdown.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>SESSION_ESTABLISHED</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">State, and fires as ConnectionEvent when we transition into this state, which is when when the WELCOME MatsSocket message comes
+from the Server, also implying that it has been authenticated: The MatsSocket is now fully established, and
+actual messages can be exchanged.
+<p/>
+User Info Tip: Show a info-box, stating "Session OK!", happy-color, e.g. green, with no countdown - and the
+entire info-box fades away fast, e.g. after 1 second.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>CONNECTION_ERROR</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">This is a pretty worthless event. It comes from WebSocket.onerror. It will <i>always</i> be trailed by a
+WebSocket.onclose, which gives the event <a href="global.html#ConnectionEventType#.LOST_CONNECTION">ConnectionEventType.LOST_CONNECTION</a>.
+<p/>
+Notice that the <a href="ConnectionEvent.html">ConnectionEvent</a> contains the Event that caused the error.
+<p/>
+User Info Tip: Show a info-box, which is some reddish color (no need for text since next event <a href="global.html#ConnectionEventType#.LOST_CONNECTION">ConnectionEventType.LOST_CONNECTION</a>) comes immediately).</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>LOST_CONNECTION</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">This comes when WebSocket.onclose is fired "unexpectedly", <b>and the reason for this close is NOT a SessionClosed Event</b> (The latter will
+instead invoke the listeners registered with <a href="MatsSocket.html#addSessionClosedEventListener">MatsSocket#addSessionClosedEventListener</a>).
+A LOST_CONNECTION will start a reconnection attempt after a very brief delay (couple of hundred milliseconds),
+and the next state transition and thus event is <a href="global.html#ConnectionEventType#.CONNECTING">ConnectionEventType.CONNECTING</a>.
+<p/>
+Notice that the <a href="ConnectionEvent.html">ConnectionEvent</a> contains the CloseEvent that caused the lost connection.
+<p/>
+User Info Tip: Show a info-box, stating "Connection broken!", which is some orange color (unless it already
+is red due to <a href="global.html#ConnectionEventType#.CONNECTION_ERROR">ConnectionEventType.CONNECTION_ERROR</a>), fading over to the next color when next event (<a href="global.html#ConnectionEventType#.CONNECTING">ConnectionEventType.CONNECTING</a>
+comes in.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>COUNTDOWN</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Events fired every 100ms while in state <a href="global.html#ConnectionEventType#.CONNECTING">ConnectionEventType.CONNECTING</a>, possibly continuing over to <a href="global.html#ConnectionEventType#.WAITING">ConnectionEventType.WAITING</a>.
+Notice that you will most probably not get an event with 0 seconds left, as that is when we (re-)transition to
+<a href="global.html#ConnectionEventType#.CONNECTING">ConnectionEventType.CONNECTING</a> and the countdown starts over (possibly with a larger timeout). Read more at
+<a href="ConnectionEvent.html#countdownSeconds">ConnectionEvent#countdownSeconds</a>.
+<p/>
+User Info Tip: Read more at <a href="global.html#ConnectionEventType#.CONNECTING">ConnectionEventType.CONNECTING</a> and <a href="global.html#ConnectionEventType#.WAITING">ConnectionEventType.WAITING</a>.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ConnectionEvent.js.html">ConnectionEvent.js</a>, <a href="ConnectionEvent.js.html#line110">line 110</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="ConnectionState"><span class="type-signature">(constant) </span>ConnectionState<span class="type-signature"> :string</span></h4>
+
+
+
+
+<div class="description">
+    States for MatsSocket's state.
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">string</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>NO_SESSION</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">This is the initial State of a MatsSocket. Also, the MatsSocket is re-set back to this State in a
+Session-Closed-from-Server situation (which is communicated via listeners registered with
+<a href="MatsSocket.html#addSessionClosedEventListener">MatsSocket#addSessionClosedEventListener</a>), OR if you have explicitly performed a
+<a href="MatsSocket.html#close">MatsSocket#close</a>.
+<p/>
+Only transition out of this state is into <a href="global.html#ConnectionState#.CONNECTING">ConnectionState.CONNECTING</a>.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>CONNECTING</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Read doc at <a href="global.html#ConnectionEventType#.CONNECTING">ConnectionEventType.CONNECTING</a>.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>WAITING</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Read doc at <a href="global.html#ConnectionEventType#.WAITING">ConnectionEventType.WAITING</a>.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>CONNECTED</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Read doc at <a href="global.html#ConnectionEventType#.CONNECTED">ConnectionEventType.CONNECTED</a>.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>SESSION_ESTABLISHED</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Read doc at <a href="global.html#ConnectionEventType#.SESSION_ESTABLISHED">ConnectionEventType.SESSION_ESTABLISHED</a>.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ConnectionState.js.html">ConnectionState.js</a>, <a href="ConnectionState.js.html#line9">line 9</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="DebugOption"><span class="type-signature">(constant) </span>DebugOption<span class="type-signature"> :string</span></h4>
+
+
+
+
+<div class="description">
+    <b>Copied directly from AuthenticationPlugin.java</b>:
+Types of debug information you can request, read more at <a href="MatsSocket.html#debug">MatsSocket#debug</a> and <a href="MessageEvent.html#debug">MessageEvent#debug</a>.
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">string</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>TIMESTAMPS</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Timing info of the separate phases. Note that time-skew between different nodes must be taken into account.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>NODES</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Node-name of the handling nodes of the separate phases.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>CUSTOM_A</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><code>AuthenticationPlugin</code>-specific "Option A" - this is not used by MatsSocket itself, but can be employed
+and given a meaning by the <code>AuthenticationPlugin</code>.
+<p/>
+Notice: You might be just as well off by implementing such functionality on the <code>Principal</code> returned by
+the <code>AuthenticationPlugin</code> ("this user is allowed to request these things") - and on the request DTOs
+from the Client ("I would like to request these things").</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>CUSTOM_B</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><code>AuthenticationPlugin</code>-specific "Option B" - this is not used by MatsSocket itself, but can be employed
+and given a meaning by the <code>AuthenticationPlugin</code>.
+<p/>
+Notice: You might be just as well off by implementing such functionality on the <code>Principal</code> returned by
+the <code>AuthenticationPlugin</code> ("this user is allowed to request these things") - and on the request DTOs
+from the Client ("I would like to request these things").</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="DebugInformation.js.html">DebugInformation.js</a>, <a href="DebugInformation.js.html#line81">line 81</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="InitiationProcessedEventType"><span class="type-signature">(constant) </span>InitiationProcessedEventType<span class="type-signature"> :string</span></h4>
+
+
+
+
+<div class="description">
+    Type of <a href="InitiationProcessedEvent.html">InitiationProcessedEvent</a> - the type of the <i>initiation</i> of a flow, which also
+determines which fields of the <code>InitiationProcessedEvent</code> are set.
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">string</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>SEND</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Flow initiated with MatsSocket#send(). Fields whose name does not start with "reply" or "request"
+will be set.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>REQUEST</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Flow initiated with MatsSocket#request(). Will have all fields except
+<a href="InitiationProcessedEvent.html#replyToTerminatorId">InitiationProcessedEvent#replyToTerminatorId</a> set.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>REQUEST_REPLY_TO</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Flow initiated with MatsSocket#requestReplyTo(). Will have <i>all</i> fields set.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="InitiationProcessedEvent.js.html">InitiationProcessedEvent.js</a>, <a href="InitiationProcessedEvent.js.html#line159">line 159</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="MatsSocketCloseCodes"><span class="type-signature">(constant) </span>MatsSocketCloseCodes<span class="type-signature"> :int</span></h4>
+
+
+
+
+<div class="description">
+    <b>Copied directly from MatsSocketServer.java</b>:
+WebSocket CloseCodes used in MatsSocket, and for what. Using both standard codes, and MatsSocket-specific/defined
+codes.
+<p/>
+Note: Plural "Codes" since that is what the JSR 356 Java WebSocket API does..!
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">int</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>VIOLATED_POLICY</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Standard code 1008 - From Server side, Client should REJECT all outstanding and "crash"/reboot application:
+used when the we cannot authenticate.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>UNEXPECTED_CONDITION</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Standard code 1011 - From Server side, Client should REJECT all outstanding and "crash"/reboot application.
+This is the default close code if the MatsSocket "onMessage"-handler throws anything, and may also explicitly
+be used by the implementation if it encounters a situation it cannot recover from.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>SERVICE_RESTART</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Standard code 1012 - From Server side, Client should REISSUE all outstanding upon reconnect: used when
+MatsSocketServer#stop(int) is invoked. Please reconnect.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>GOING_AWAY</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Standard code 1001 - From Client/Browser side, client should have REJECTed all outstanding: Synonym for
+#CLOSE_SESSION, as the WebSocket documentation states <i>"indicates that an endpoint is "going away",
+such as a server going down <b>or a browser having navigated away from a page.</b>"</i>, the latter point
+being pretty much exactly correct wrt. when to close a session. So, if a browser decides to use this code
+when the user navigates away and the client MatsSocket library or employing application does not catch it,
+we'd want to catch this as a Close Session. Notice that I've not experienced a browser that actually utilizes
+this close code yet, though!
+<p/>
+<b>Notice that if a close with this close code <i>is initiated from the Server-side</i>, this should NOT be
+considered a CLOSE_SESSION by the neither the client nor the server!</b> At least Jetty's implementation of
+JSR 356 WebSocket API for Java sends GOING_AWAY upon socket close due to timeout. Since a timeout can happen
+if we loose connection and thus can't convey PINGs, the MatsSocketServer must not interpret Jetty's
+timeout-close as Close Session. Likewise, if the client just experienced massive lag on the connection, and
+thus didn't get the PING over to the server in a timely fashion, but then suddenly gets Jetty's timeout close
+with GOING_AWAY, this should not be interpreted by the client as the server wants to close the session.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>CLOSE_SESSION</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">4000: Both from Server side and Client/Browser side, client should REJECT all outstanding:
+<ul>
+<li>From Browser: Used when the browser closes WebSocket "on purpose", wanting to close the session -
+typically when the user explicitly logs out, or navigates away from web page. All traces of the
+MatsSocketSession are effectively deleted from the server, including any undelivered replies and messages
+("push") from server.</li>
+<li>From Server: MatsSocketServer#closeSession(String) was invoked, and the WebSocket to that client
+was still open, so we close it.</li>
+</ul></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>SESSION_LOST</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">4001: From Server side, Client should REJECT all outstanding and "crash"/reboot application: A
+HELLO:RECONNECT was attempted, but the session was gone. A considerable amount of time has probably gone by
+since it last was connected. The client application must get its state synchronized with the server side's
+view of the world, thus the suggestion of "reboot".</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>RECONNECT</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">4002: Both from Server side and from Client/Browser side: REISSUE all outstanding upon reconnect:
+<ul>
+<li>From Client: The client just fancied a little break (just as if lost connection in a tunnel), used from
+integration tests.</li>
+<li>From Server: We ask that the client reconnects. This gets us a clean state and in particular new
+authentication (In case of using OAuth/OIDC tokens, the client is expected to fetch a fresh token from token
+server).</li>
+</ul></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>DISCONNECT</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">4003: From Server side: Currently used in the specific situation where a MatsSocket client connects with
+the same MatsSocketSessionId as an existing WebSocket connection. This could happen if the client has
+realized that a connection is wonky and wants to ditch it, but the server has not realized the same yet.
+When the server then gets the new connect, it'll see that there is an active WebSocket already. It needs
+to close that. But the client "must not do anything" other than what it already is doing - reconnecting.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>MATS_SOCKET_PROTOCOL_ERROR</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">4004: From Server side: Client should REJECT all outstanding and "crash"/reboot application: Used when the
+client does not speak the MatsSocket protocol correctly. Session is closed.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>nameFor</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Resolves the numeric "close code" to the String key name of this enum, or <code>"UNKNOWN("+closeCode+")"</code>
+for unknown numeric codes.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="MatsSocketCloseCodes.js.html">MatsSocketCloseCodes.js</a>, <a href="MatsSocketCloseCodes.js.html#line13">line 13</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="MessageEventType"><span class="type-signature">(constant) </span>MessageEventType<span class="type-signature"> :string</span></h4>
+
+
+
+
+<div class="description">
+    Types of <a href="MessageEvent.html">MessageEvent</a>.
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">string</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>RESOLVE</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>REJECT</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>SEND</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>REQUEST</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>PUB</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>TIMEOUT</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">"Synthetic" event in that it is not a message from Server: A Client-to-Server
+Request was not replied to by the server within the
+<a href="MatsSocket.html#requestTimeout">default request timeout</a> - or a specific timeout specified in the request
+invocation. In these situations, the Request Promise is rejected with a <a href="MessageEvent.html">MessageEvent</a> of this type,
+and the <a href="MessageEvent.html#data">MessageEvent#data</a> value is undefined.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>SESSION_CLOSED</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">"Synthetic" event in that it is not a message from Server: This only happens if the MatsSocketSession is
+closed with outstanding Client-to-Server Requests not yet replied to by the
+server. In these situations, the Request Promise is rejected with a <a href="MessageEvent.html">MessageEvent</a> of this type, and
+the <a href="MessageEvent.html#data">MessageEvent#data</a> value is undefined.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="MessageEvent.js.html">MessageEvent.js</a>, <a href="MessageEvent.js.html#line113">line 113</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="MessageType"><span class="type-signature">(constant) </span>MessageType<span class="type-signature"> :string</span></h4>
+
+
+
+
+<div class="description">
+    <b>Copied directly from MatsSocketServer.java</b>:
+All Message Types (aka MatsSocket Envelope Types) used in the wire-protocol of MatsSocket.
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">string</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>HELLO</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A HELLO message must be part of the first Pipeline of messages, preferably alone. One of the messages in the
+first Pipeline must have the "auth" field set, and it might as well be the HELLO.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>WELCOME</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The reply to a #HELLO, where the MatsSocketSession is established, and the MatsSocketSessionId is
+returned. If you included a MatsSocketSessionId in the HELLO, signifying that you want to reconnect to an
+existing session, and you actually get a WELCOME back, it will be the same as what you provided - otherwise
+the connection is closed with MatsSocketCloseCodes#SESSION_LOST.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>SEND</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The sender sends a "fire and forget" style message.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>REQUEST</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The sender initiates a request, to which a #RESOLVE or #REJECT message is expected.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>RETRY</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The sender should retry the message (the receiver could not handle it right now, but a Retry might fix it).</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>ACK</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The specified message was Received, and acknowledged positively - i.e. the other party has decided to process
+it.
+<p/>
+The sender of the ACK has now taken over responsibility of the specified message, put it (at least the
+reference ClientMessageId) in its <i>Inbox</i>, and possibly started processing it. The reason for the Inbox
+is so that if it Receives the message again, it may just insta-ACK/NACK it and toss this copy out the window
+(since it has already handled it).
+<p/>
+When an ACK is received, the receiver may safely delete the acknowledged message from its <i>Outbox</i>.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>NACK</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The specified message was Received, but it did not acknowledge it - i.e. the other party has decided to NOT
+process it.
+<p/>
+The sender of the NACK has now taken over responsibility of the specified message, put it (at least the
+reference Client/Server MessageId) in its <i>Inbox</i> - but has evidently decided not to process it. The
+reason for the Inbox is so that if it Receives the message again, it may just insta-ACK/NACK it and toss this
+copy out the window (since it has already handled it).
+<p/>
+When an NACK is received, the receiver may safely delete the acknowledged message from its <i>Outbox</i>.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>ACK2</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">An "Acknowledge ^ 2", i.e. an acknowledge of the #ACK or #NACK. When the receiver gets this,
+it may safely delete the entry it has for the specified message from its <i>Inbox</i>.
+<p/>
+The message is now fully transferred from one side to the other, and both parties again has no reference to
+this message in their Inbox and Outbox.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>RESOLVE</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A RESOLVE-reply to a previous #REQUEST - if the Client did the {@code REQUEST}, the Server will
+answer with either a RESOLVE or #REJECT.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>REJECT</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A REJECT-reply to a previous #REQUEST - if the Client did the {@code REQUEST}, the Server will answer
+with either a REJECT or #RESOLVE.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>SUB</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Request from Client: The Client want to subscribe to a Topic, the TopicId is specified in 'eid'.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>UNSUB</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Request from Client: The Client want to unsubscribe to a Topic, the TopicId is specified in 'eid'.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>SUB_OK</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Reply from Server: Subscription was OK. If this is a reconnect, this indicates that any messages that was
+lost "while offline" will now be delivered/"replayed".</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>SUB_LOST</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Reply from Server: Subscription went OK, but you've lost messages: The messageId that was referenced in the
+#SUB was not known to the server, implying that there are at least one message that has expired, and
+as such it can be many - so you won't get any "replayed".</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>SUB_NO_AUTH</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Reply from Server: Subscription was not authorized - no messages for this Topic will be delivered.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>PUB</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Topic message from Server: A message is issued on Topic, the TopicId is specified in 'eid', while the message
+is in 'msg'.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>REAUTH</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The server requests that the Client re-authenticates, where the Client should immediately get a fresh
+authentication and send it back using either any message it has pending, or in a separate #AUTH
+message. Message processing - both processing of received messages, and sending of outgoing messages (i.e.
+Replies to REQUESTs, or Server-initiated SENDs and REQUESTs) will be stalled until such auth is gotten.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>AUTH</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">From Client: The client can use a separate AUTH message to send over the requested #REAUTH (it could
+just as well put the 'auth' in a PING or any other message it had pending).</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>PING</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A PING, to which a #PONG is expected.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>PONG</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A Reply to a #PING.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="MessageType.js.html">MessageType.js</a>, <a href="MessageType.js.html#line10">line 10</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="ReceivedEventType"><span class="type-signature">(constant) </span>ReceivedEventType<span class="type-signature"> :string</span></h4>
+
+
+
+
+<div class="description">
+    Types of <a href="ReceivedEvent.html">ReceivedEvent</a>.
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">string</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>ACK</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">If the Server-side MatsSocketEndpoint/Terminator accepted the message for handling (and if relevant,
+forwarded it to the Mats fabric). The returned Promise of send() is <i>resolved</i> with this type of event.
+The 'receivedCallback' of a request() will get both "ack" and "nack", thus must check on
+the type if it makes a difference.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>NACK</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">If the Server-side MatsSocketEndpoint/Terminator dit NOT accept the message, either explicitly with
+context.deny(), or by failing with Exception. The returned Promise of send() is <i>rejected</i> with this
+type of event. The 'receivedCallback' of a request() will get both "nack" and "ack", thus must
+check on the type if it makes a difference.
+<p/>
+Notice that a for a Client-initiated Request which is insta-rejected in the incomingHandler by invocation of
+context.reject(..), this implies <i>acknowledge</i> of the <i>reception</i> of the message, but <i>reject</i>
+as with regard to the </i>reply</i> (the Promise returned from request(..)).</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>TIMEOUT</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">"Synthetic" event in that it is not a message from Server: A Client-to-Server
+Request was not ACKed or NACKed by the server within the
+default request timeout - or a specific timeout specified in the request
+invocation. In these situations, any nack- or receivedCallback will be invoked with a <a href="ReceivedEvent.html">ReceivedEvent</a>
+of this type.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>SESSION_CLOSED</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">"Synthetic" event in that it is not a message from Server: This only happens if the MatsSocketSession is
+closed with outstanding Initiations not yet Received on Server. In these situations, any nack- or
+receivedCallback will be invoked with a <a href="ReceivedEvent.html">ReceivedEvent</a> of this type.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ReceivedEvent.js.html">ReceivedEvent.js</a>, <a href="ReceivedEvent.js.html#line70">line 70</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="SubscriptionEventType"><span class="type-signature">(constant) </span>SubscriptionEventType<span class="type-signature"> :string</span></h4>
+
+
+
+
+<div class="description">
+    Type of <a href="SubscriptionEvent.html">SubscriptionEvent</a>.
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">string</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>OK</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The subscription on the server side went ok. If reconnect, any missing messages are now being sent.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>NOT_AUTHORIZED</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">You were not authorized to subscribe to this Topic.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>LOST_MESSAGES</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Upon reconnect, the "last message Id" was not known to the server, implying that there are lost messages.
+Since you will now have to handle this situation by other means anyway (e.g. do a request for all stock ticks
+between the last know timestamp and now), you will thus not get any of the lost messages even if the server
+has some.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="SubscriptionEvent.js.html">SubscriptionEvent.js</a>, <a href="SubscriptionEvent.js.html#line37">line 37</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+    
+
+    
+
+    
+        <h3 class="subsection-title">Type Definitions</h3>
+
+        
+                
+
+    
+
+    
+    <h4 class="name" id="addPingPongCallback"><span class="type-signature"></span>addPingPongCallback<span class="signature">(pingPong)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Callback function for <a href="MatsSocket.html#addPingPongListener">MatsSocket#addPingPongListener</a>.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>pingPong</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="PingPong.html">PingPong</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">information about the ping and the pong.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="MatsSocket.js.html">MatsSocket.js</a>, <a href="MatsSocket.js.html#line585">line 585</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                
+
+    
+
+    
+    <h4 class="name" id="authorizationExpiredCallback"><span class="type-signature"></span>authorizationExpiredCallback<span class="signature">(authorizationRequiredEvent)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Callback function for <a href="MatsSocket.html#setAuthorizationExpiredCallback">MatsSocket#setAuthorizationExpiredCallback</a>.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>authorizationRequiredEvent</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="AuthorizationRequiredEvent.html">AuthorizationRequiredEvent</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">information about why authorization information
+is requested.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="MatsSocket.js.html">MatsSocket.js</a>, <a href="MatsSocket.js.html#line421">line 421</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                
+
+    
+
+    
+    <h4 class="name" id="connectionEventCallback"><span class="type-signature"></span>connectionEventCallback<span class="signature">(connectionEvent)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Callback function for <a href="MatsSocket.html#addConnectionEventListener">MatsSocket#addConnectionEventListener</a>.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>connectionEvent</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="ConnectionEvent.html">ConnectionEvent</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">giving information about what happened.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="MatsSocket.js.html">MatsSocket.js</a>, <a href="MatsSocket.js.html#line340">line 340</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                
+
+    
+
+    
+    <h4 class="name" id="errorEventCallback"><span class="type-signature"></span>errorEventCallback<span class="signature">(errorEvent)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Callback function for <a href="MatsSocket.html#addErrorEventListener">MatsSocket#addErrorEventListener</a>.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>errorEvent</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="ErrorEvent.html">ErrorEvent</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">information about what error happened.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="MatsSocket.js.html">MatsSocket.js</a>, <a href="MatsSocket.js.html#line396">line 396</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                
+
+    
+
+    
+    <h4 class="name" id="initiationProcessedEventCallback"><span class="type-signature"></span>initiationProcessedEventCallback<span class="signature">(initiationProcessedEvent)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Callback function for <a href="MatsSocket.html#addInitiationProcessedEventListener">MatsSocket#addInitiationProcessedEventListener</a>.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>initiationProcessedEvent</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="InitiationProcessedEvent.html">InitiationProcessedEvent</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">information about the processing of the initiation.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="MatsSocket.js.html">MatsSocket.js</a>, <a href="MatsSocket.js.html#line657">line 657</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                
+
+    
+
+    
+    <h4 class="name" id="sessionClosedEventCallback"><span class="type-signature"></span>sessionClosedEventCallback<span class="signature">(closeEvent)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Callback function for <a href="MatsSocket.html#addSessionClosedEventListener">MatsSocket#addSessionClosedEventListener</a>.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>closeEvent</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">CloseEvent</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the WebSocket's CloseEvent.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="MatsSocket.js.html">MatsSocket.js</a>, <a href="MatsSocket.js.html#line274">line 274</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                
+
+    
+
+    
+    <h4 class="name" id="subscriptionEventCallback"><span class="type-signature"></span>subscriptionEventCallback<span class="signature">(subscriptionEvent)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Callback function for <a href="MatsSocket.html#addSubscriptionEventListener">MatsSocket#addSubscriptionEventListener</a>.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>subscriptionEvent</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="SubscriptionEvent.html">SubscriptionEvent</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">giving information about what the server had to say about
+subscriptions.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="MatsSocket.js.html">MatsSocket.js</a>, <a href="MatsSocket.js.html#line371">line 371</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AuthorizationRequiredEvent.html">AuthorizationRequiredEvent</a></li><li><a href="ConnectionEvent.html">ConnectionEvent</a></li><li><a href="DebugInformation.html">DebugInformation</a></li><li><a href="ErrorEvent.html">ErrorEvent</a></li><li><a href="InitiationProcessedEvent.html">InitiationProcessedEvent</a></li><li><a href="MatsSocket.html">MatsSocket</a></li><li><a href="MessageEvent.html">MessageEvent</a></li><li><a href="PingPong.html">PingPong</a></li><li><a href="ReceivedEvent.html">ReceivedEvent</a></li><li><a href="SubscriptionEvent.html">SubscriptionEvent</a></li></ul><h3>Global</h3><ul><li><a href="global.html#AuthorizationRequiredEventType">AuthorizationRequiredEventType</a></li><li><a href="global.html#ConnectionEventType">ConnectionEventType</a></li><li><a href="global.html#ConnectionState">ConnectionState</a></li><li><a href="global.html#DebugOption">DebugOption</a></li><li><a href="global.html#InitiationProcessedEventType">InitiationProcessedEventType</a></li><li><a href="global.html#MatsSocketCloseCodes">MatsSocketCloseCodes</a></li><li><a href="global.html#MessageEventType">MessageEventType</a></li><li><a href="global.html#MessageType">MessageType</a></li><li><a href="global.html#ReceivedEventType">ReceivedEventType</a></li><li><a href="global.html#SubscriptionEventType">SubscriptionEventType</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Wed Dec 21 2022 12:35:09 GMT+0100 (Central European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -1,6 +1,7 @@
 ---
 permalink: /about/
 title: "About"
+author_profile: true
 ---
 
 MatsSocket is a WebSocket-based client-server solution which bridges the asynchronous message based nature

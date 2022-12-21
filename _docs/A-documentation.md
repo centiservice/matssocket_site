@@ -9,10 +9,10 @@ toc: true
 
 MatsSocket documentation is evolving. There should be enough to get you going.
 
-### JavaDoc
+### CodeDoc: JavaDoc and JSDoc
 
-MatsSocket have pretty extensive [JavaDoc](/javadoc/), so when you need something from the API, that's where you want to
-go.
+MatsSocket have pretty extensive [Code Documentation](/codedoc/), so when you need something from the Client or Server
+APIs, that's where you want to go.
 
 ### Documentation @ mats3.io
 

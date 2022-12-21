@@ -1,0 +1,1362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Class: InitiationProcessedEvent</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Class: InitiationProcessedEvent</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2><span class="attribs"><span class="type-signature"></span></span>InitiationProcessedEvent<span class="signature">(endpointId, clientMessageId, sentTimestamp, sessionEstablishedOffsetMillis, traceId, initiationMessage, acknowledgeRoundTripMillis, replyMessageEventType, replyToTerminatorId, requestRoundTripMillis, replyMessageEvent)</span><span class="type-signature"></span></h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+    
+
+    
+    <h4 class="name" id="InitiationProcessedEvent"><span class="type-signature"></span>new InitiationProcessedEvent<span class="signature">(endpointId, clientMessageId, sentTimestamp, sessionEstablishedOffsetMillis, traceId, initiationMessage, acknowledgeRoundTripMillis, replyMessageEventType, replyToTerminatorId, requestRoundTripMillis, replyMessageEvent)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    (Metrics) Information about Client-to-Server SENDs and REQUESTs (aka <i>Client Initiations</i>), including
+experienced round-trip times for both Received acknowledgement, and for Requests, the Request-to-Reply time.
+<p />
+For each message that, for sends, has been acknowledged received, and for requests, has been replied to, gives
+this information:
+<ul>
+    <li>Client MessageId  (envelope's 'cmid').</li>
+    <li>Timestamp of when message was sent.</li>
+    <li>Target MatsSocket Endpoint or Terminator Id  (envelope's 'eid').</li>
+    <li>TraceId for the SEND or REQUEST  (envelope's 'tid').</li>
+    <li>The outgoing message, i.e. the SEND or the REQUEST message  (envelope's 'msg').</li>
+    <li>Experienced Received Acknowledge round-trip time.</li>
+    <li>For Requests, the Reply's <a href="global.html#MessageEventType">MessageEventType</a></li>
+    <li>For requestReplyTo Requests, the replyToTerminatorId.</li>
+    <li>For Requests, the total experienced Request-to-Reply time.</li>
+    <li>For Requests, the Reply <a href="MessageEvent.html">MessageEvent</a> object.</li>
+</ul>
+You may "subscribe" to <code>InitiationProcessedEvents</code> using
+MatsSocket#addInitiationProcessedEventListener(), and you may get the latest such events from the
+property MatsSocket#initiations.
+<p />
+<b>Note on event ordering</b>:
+<ul>
+    <li>send: First <a href="ReceivedEvent.html">ReceivedEvent</a> is issued. Then an <a href="InitiationProcessedEvent.html">InitiationProcessedEvent</a> is added to
+        MatsSocket#initiations, and then all <a href="InitiationProcessedEvent.html">InitiationProcessedEvent</a> listeners are invoked</li>
+    <li>request/requestReplyTo: First <a href="ReceivedEvent.html">ReceivedEvent</a> is issued (i.e. ack/nack), then when the reply
+    comes back to the server, an <a href="InitiationProcessedEvent.html">InitiationProcessedEvent</a> is added to MatsSocket#initiations, and
+    then all <a href="InitiationProcessedEvent.html">InitiationProcessedEvent</a> listeners are invoked, and finally the <a href="MessageEvent.html">MessageEvent</a> is
+    delivered, either as settling of the return Reply-Promise (for 'request'), or invocation of the Terminator's
+    message- or rejectCallbacks (for 'requestReplyTo').
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>endpointId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>clientMessageId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>sentTimestamp</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>sessionEstablishedOffsetMillis</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">float</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>traceId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>initiationMessage</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>acknowledgeRoundTripMillis</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">float</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>replyMessageEventType</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#MessageEventType">MessageEventType</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>replyToTerminatorId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>requestRoundTripMillis</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">float</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>replyMessageEvent</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="MessageEvent.html">MessageEvent</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="InitiationProcessedEvent.js.html">InitiationProcessedEvent.js</a>, <a href="InitiationProcessedEvent.js.html#line49">line 49</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="acknowledgeRoundTripMillis"><span class="type-signature"></span>acknowledgeRoundTripMillis<span class="type-signature"> :float</span></h4>
+
+
+
+
+<div class="description">
+    The experienced round-trip time for the Received Acknowledgement - this is the time back-and-forth.
+
+<b>Note that this number can be a float, not necessarily integer</b>.
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">float</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="InitiationProcessedEvent.js.html">InitiationProcessedEvent.js</a>, <a href="InitiationProcessedEvent.js.html#line116">line 116</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="clientMessageId"><span class="type-signature"></span>clientMessageId<span class="type-signature"> :string</span></h4>
+
+
+
+
+<div class="description">
+    The Client MessageId of the Initiation  (envelope's 'cmid'). For this particular MatsSocket library, this
+is currently an integer sequence id.
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">string</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="InitiationProcessedEvent.js.html">InitiationProcessedEvent.js</a>, <a href="InitiationProcessedEvent.js.html#line70">line 70</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="endpointId"><span class="type-signature"></span>endpointId<span class="type-signature"> :string</span></h4>
+
+
+
+
+<div class="description">
+    Target Server MatsSocket Endpoint or Terminator Id  (envelope's 'eid').
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">string</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="InitiationProcessedEvent.js.html">InitiationProcessedEvent.js</a>, <a href="InitiationProcessedEvent.js.html#line62">line 62</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="initiationMessage"><span class="type-signature"></span>initiationMessage<span class="type-signature"> :Object</span></h4>
+
+
+
+
+<div class="description">
+    The message object that was sent with the initiation, i.e. on send(), request() or requestReplyTo()  (outgoing envelope's 'msg').
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="InitiationProcessedEvent.js.html">InitiationProcessedEvent.js</a>, <a href="InitiationProcessedEvent.js.html#line107">line 107</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="replyMessageEvent"><span class="type-signature"></span>replyMessageEvent<span class="type-signature"> :<a href="MessageEvent.html">MessageEvent</a></span></h4>
+
+
+
+
+<div class="description">
+    The Reply <a href="MessageEvent.html">MessageEvent</a> that was supplied to the Promise (on resolve/then or reject/catch) or ReplyTo
+Client Terminator.
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type"><a href="MessageEvent.html">MessageEvent</a></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="InitiationProcessedEvent.js.html">InitiationProcessedEvent.js</a>, <a href="InitiationProcessedEvent.js.html#line149">line 149</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="replyMessageEventType"><span class="type-signature"></span>replyMessageEventType<span class="type-signature"> :string</span></h4>
+
+
+
+
+<div class="description">
+    The <a href="global.html#MessageEventType">MessageEventType</a> for Replies to Request Initiations.
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">string</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="InitiationProcessedEvent.js.html">InitiationProcessedEvent.js</a>, <a href="InitiationProcessedEvent.js.html#line125">line 125</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="replyToTerminatorId"><span class="type-signature"></span>replyToTerminatorId<span class="type-signature"> :string</span></h4>
+
+
+
+
+<div class="description">
+    The 'replyToTerminatorId' for MatsSocket#requestReplyTo()-Requests.
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">string</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="InitiationProcessedEvent.js.html">InitiationProcessedEvent.js</a>, <a href="InitiationProcessedEvent.js.html#line132">line 132</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="requestReplyRoundTripMillis"><span class="type-signature"></span>requestReplyRoundTripMillis<span class="type-signature"> :float</span></h4>
+
+
+
+
+<div class="description">
+    The experienced round-trip time from a Request initiation to the Reply (RESOLVE or REJECT) comes back.
+
+<b>Note that this number can be a float, not necessarily integer</b>.
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">float</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="InitiationProcessedEvent.js.html">InitiationProcessedEvent.js</a>, <a href="InitiationProcessedEvent.js.html#line141">line 141</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="sentTimestamp"><span class="type-signature"></span>sentTimestamp<span class="type-signature"> :int</span></h4>
+
+
+
+
+<div class="description">
+    Millis-from-epoch when this initiation was sent.
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">int</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="InitiationProcessedEvent.js.html">InitiationProcessedEvent.js</a>, <a href="InitiationProcessedEvent.js.html#line77">line 77</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="sessionEstablishedOffsetMillis"><span class="type-signature"></span>sessionEstablishedOffsetMillis<span class="type-signature"> :float</span></h4>
+
+
+
+
+<div class="description">
+    The number of milliseconds offset for sending this message from the initial ConnectionEventType#SESSION_ESTABLISHED event for
+this MatsSocket - <b>this number will typically be negative for the first messages</b>: A negative number
+implies that the message was sent before the WELCOME was received, which again implies that the very first
+message will by definition have a negative offset since it is this message that starts the HELLO/WELCOME
+handshake and is thus enqueued before the WELCOME has been received. This is desirable: Upon application
+startup, stack up all requests that you need answer for to show the initial screen, and they will all be
+sent in a single pipeline, directly trailing the HELLO, their answers coming in as soon as possible after
+the WELCOME.
+
+<b>Note that this number can be a float, not necessarily integer</b>.
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">float</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="InitiationProcessedEvent.js.html">InitiationProcessedEvent.js</a>, <a href="InitiationProcessedEvent.js.html#line93">line 93</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="traceId"><span class="type-signature"></span>traceId<span class="type-signature"> :string</span></h4>
+
+
+
+
+<div class="description">
+    TraceId for the initiation - which follows through all parts of the processing  (envelope's 'tid').
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">string</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="InitiationProcessedEvent.js.html">InitiationProcessedEvent.js</a>, <a href="InitiationProcessedEvent.js.html#line100">line 100</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="type"><span class="type-signature"></span>type<span class="type-signature"> :<a href="global.html#InitiationProcessedEventType">InitiationProcessedEventType</a></span></h4>
+
+
+
+
+<div class="description">
+    Which initiation type of this flow, enum of <a href="global.html#InitiationProcessedEventType">InitiationProcessedEventType</a>.
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type"><a href="global.html#InitiationProcessedEventType">InitiationProcessedEventType</a></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="InitiationProcessedEvent.js.html">InitiationProcessedEvent.js</a>, <a href="InitiationProcessedEvent.js.html#line55">line 55</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AuthorizationRequiredEvent.html">AuthorizationRequiredEvent</a></li><li><a href="ConnectionEvent.html">ConnectionEvent</a></li><li><a href="DebugInformation.html">DebugInformation</a></li><li><a href="ErrorEvent.html">ErrorEvent</a></li><li><a href="InitiationProcessedEvent.html">InitiationProcessedEvent</a></li><li><a href="MatsSocket.html">MatsSocket</a></li><li><a href="MessageEvent.html">MessageEvent</a></li><li><a href="PingPong.html">PingPong</a></li><li><a href="ReceivedEvent.html">ReceivedEvent</a></li><li><a href="SubscriptionEvent.html">SubscriptionEvent</a></li></ul><h3>Global</h3><ul><li><a href="global.html#AuthorizationRequiredEventType">AuthorizationRequiredEventType</a></li><li><a href="global.html#ConnectionEventType">ConnectionEventType</a></li><li><a href="global.html#ConnectionState">ConnectionState</a></li><li><a href="global.html#DebugOption">DebugOption</a></li><li><a href="global.html#InitiationProcessedEventType">InitiationProcessedEventType</a></li><li><a href="global.html#MatsSocketCloseCodes">MatsSocketCloseCodes</a></li><li><a href="global.html#MessageEventType">MessageEventType</a></li><li><a href="global.html#MessageType">MessageType</a></li><li><a href="global.html#ReceivedEventType">ReceivedEventType</a></li><li><a href="global.html#SubscriptionEventType">SubscriptionEventType</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Wed Dec 21 2022 12:35:09 GMT+0100 (Central European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

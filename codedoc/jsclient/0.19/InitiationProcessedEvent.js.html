@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: InitiationProcessedEvent.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: InitiationProcessedEvent.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>export { InitiationProcessedEvent, InitiationProcessedEventType }
+
+/**
+ * (Metrics) Information about Client-to-Server SENDs and REQUESTs (aka &lt;i>Client Initiations&lt;/i>), including
+ * experienced round-trip times for both Received acknowledgement, and for Requests, the Request-to-Reply time.
+ * &lt;p />
+ * For each message that, for sends, has been acknowledged received, and for requests, has been replied to, gives
+ * this information:
+ * &lt;ul>
+ *     &lt;li>Client MessageId  (envelope's 'cmid').&lt;/li>
+ *     &lt;li>Timestamp of when message was sent.&lt;/li>
+ *     &lt;li>Target MatsSocket Endpoint or Terminator Id  (envelope's 'eid').&lt;/li>
+ *     &lt;li>TraceId for the SEND or REQUEST  (envelope's 'tid').&lt;/li>
+ *     &lt;li>The outgoing message, i.e. the SEND or the REQUEST message  (envelope's 'msg').&lt;/li>
+ *     &lt;li>Experienced Received Acknowledge round-trip time.&lt;/li>
+ *     &lt;li>For {@link MatsSocket#request() Requests}, the Reply's {@link MessageEventType}&lt;/li>
+ *     &lt;li>For {@link MatsSocket#requestReplyTo() requestReplyTo} Requests, the replyToTerminatorId.&lt;/li>
+ *     &lt;li>For Requests, the total experienced Request-to-Reply time.&lt;/li>
+ *     &lt;li>For Requests, the Reply {@link MessageEvent} object.&lt;/li>
+ * &lt;/ul>
+ * You may "subscribe" to &lt;code>InitiationProcessedEvents&lt;/code> using
+ * {@link MatsSocket#addInitiationProcessedEventListener()}, and you may get the latest such events from the
+ * property {@link MatsSocket#initiations}.
+ * &lt;p />
+ * &lt;b>Note on event ordering&lt;/b>:
+ * &lt;ul>
+ *     &lt;li>send: First {@link ReceivedEvent} is issued. Then an {@link InitiationProcessedEvent} is added to
+ *         {@link MatsSocket#initiations}, and then all {@link InitiationProcessedEvent} listeners are invoked&lt;/li>
+ *     &lt;li>request/requestReplyTo: First {@link ReceivedEvent} is issued (i.e. ack/nack), then when the reply
+ *     comes back to the server, an {@link InitiationProcessedEvent} is added to {@link MatsSocket#initiations}, and
+ *     then all {@link InitiationProcessedEvent} listeners are invoked, and finally the {@link MessageEvent} is
+ *     delivered, either as settling of the return Reply-Promise (for 'request'), or invocation of the Terminator's
+ *     message- or rejectCallbacks (for 'requestReplyTo').
+ * &lt;/ul>
+ *
+ * @param {string} endpointId
+ * @param {string} clientMessageId
+ * @param {int} sentTimestamp
+ * @param {float} sessionEstablishedOffsetMillis
+ * @param {string} traceId
+ * @param {Object} initiationMessage
+ * @param {float} acknowledgeRoundTripMillis
+ * @param {MessageEventType} replyMessageEventType
+ * @param {string} replyToTerminatorId
+ * @param {float} requestRoundTripMillis
+ * @param {MessageEvent} replyMessageEvent
+ * @class
+ */
+function InitiationProcessedEvent(endpointId, clientMessageId, sentTimestamp, sessionEstablishedOffsetMillis, traceId, initiationMessage, acknowledgeRoundTripMillis, replyMessageEventType, replyToTerminatorId, requestRoundTripMillis, replyMessageEvent) {
+    /**
+     * Which initiation type of this flow, enum of {@link InitiationProcessedEventType}.
+     *
+     * @type {InitiationProcessedEventType}
+     */
+    this.type = ((replyToTerminatorId ? InitiationProcessedEventType.REQUEST_REPLY_TO : (replyMessageEventType ? InitiationProcessedEventType.REQUEST : InitiationProcessedEventType.SEND)));
+
+    /**
+     * Target Server MatsSocket Endpoint or Terminator Id  (envelope's 'eid').
+     *
+     * @type {string}
+     */
+    this.endpointId = endpointId;
+
+    /**
+     * The Client MessageId of the Initiation  (envelope's 'cmid'). For this particular MatsSocket library, this
+     * is currently an integer sequence id.
+     *
+     * @type {string}
+     */
+    this.clientMessageId = clientMessageId;
+
+    /**
+     * Millis-from-epoch when this initiation was sent.
+     *
+     * @type {int}
+     */
+    this.sentTimestamp = sentTimestamp;
+
+    /**
+     * The number of milliseconds offset for sending this message from the initial {@link ConnectionEventType#SESSION_ESTABLISHED} event for
+     * this MatsSocket - &lt;b>this number will typically be negative for the first messages&lt;/b>: A negative number
+     * implies that the message was sent before the WELCOME was received, which again implies that the very first
+     * message will by definition have a negative offset since it is this message that starts the HELLO/WELCOME
+     * handshake and is thus enqueued before the WELCOME has been received. This is desirable: Upon application
+     * startup, stack up all requests that you need answer for to show the initial screen, and they will all be
+     * sent in a single pipeline, directly trailing the HELLO, their answers coming in as soon as possible after
+     * the WELCOME.
+     *
+     * &lt;b>Note that this number can be a float, not necessarily integer&lt;/b>.
+     *
+     * @type {float}
+     */
+    this.sessionEstablishedOffsetMillis = sessionEstablishedOffsetMillis;
+
+    /**
+     * TraceId for the initiation - which follows through all parts of the processing  (envelope's 'tid').
+     *
+     * @type {string}
+     */
+    this.traceId = traceId;
+
+    /**
+     * The message object that was sent with the initiation, i.e. on send(), request() or requestReplyTo()  (outgoing envelope's 'msg').
+     *
+     * @type {Object}
+     */
+    this.initiationMessage = initiationMessage;
+
+    /**
+     * The experienced round-trip time for the Received Acknowledgement - this is the time back-and-forth.
+     *
+     * &lt;b>Note that this number can be a float, not necessarily integer&lt;/b>.
+     *
+     * @type {float}
+     */
+    this.acknowledgeRoundTripMillis = acknowledgeRoundTripMillis;
+
+    // === For Requests.
+
+    /**
+     * The {@link MessageEventType} for Replies to Request Initiations.
+     *
+     * @type {string}
+     */
+    this.replyMessageEventType = replyMessageEventType;
+
+    /**
+     * The 'replyToTerminatorId' for {@link MatsSocket#requestReplyTo()}-Requests.
+     *
+     * @type {string}
+     */
+    this.replyToTerminatorId = replyToTerminatorId;
+
+    /**
+     * The experienced round-trip time from a Request initiation to the Reply (RESOLVE or REJECT) comes back.
+     *
+     * &lt;b>Note that this number can be a float, not necessarily integer&lt;/b>.
+     *
+     * @type {float}
+     */
+    this.requestReplyRoundTripMillis = requestRoundTripMillis;
+
+    /**
+     * The Reply {@link MessageEvent} that was supplied to the Promise (on resolve/then or reject/catch) or ReplyTo
+     * Client {@link #terminator() Terminator}.
+     *
+     * @type {MessageEvent}
+     */
+    this.replyMessageEvent = replyMessageEvent;
+}
+
+/**
+ * Type of {@link InitiationProcessedEvent} - the type of the &lt;i>initiation&lt;/i> of a flow, which also
+ * determines which fields of the &lt;code>InitiationProcessedEvent&lt;/code> are set.
+ *
+ * @enum {string}
+ * @readonly
+ */
+const InitiationProcessedEventType = {
+    /**
+     * Flow initiated with {@link MatsSocket#send()}. Fields whose name does not start with "reply" or "request"
+     * will be set.
+     */
+    SEND: "send",
+
+    /**
+     * Flow initiated with {@link MatsSocket#request()}. Will have all fields except
+     * {@link InitiationProcessedEvent#replyToTerminatorId} set.
+     */
+    REQUEST: "request",
+
+    /**
+     * Flow initiated with {@link MatsSocket#requestReplyTo()}. Will have &lt;i>all&lt;/i> fields set.
+     */
+    REQUEST_REPLY_TO: "requestreplyto"
+};
+Object.freeze(InitiationProcessedEventType);
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AuthorizationRequiredEvent.html">AuthorizationRequiredEvent</a></li><li><a href="ConnectionEvent.html">ConnectionEvent</a></li><li><a href="DebugInformation.html">DebugInformation</a></li><li><a href="ErrorEvent.html">ErrorEvent</a></li><li><a href="InitiationProcessedEvent.html">InitiationProcessedEvent</a></li><li><a href="MatsSocket.html">MatsSocket</a></li><li><a href="MessageEvent.html">MessageEvent</a></li><li><a href="PingPong.html">PingPong</a></li><li><a href="ReceivedEvent.html">ReceivedEvent</a></li><li><a href="SubscriptionEvent.html">SubscriptionEvent</a></li></ul><h3>Global</h3><ul><li><a href="global.html#AuthorizationRequiredEventType">AuthorizationRequiredEventType</a></li><li><a href="global.html#ConnectionEventType">ConnectionEventType</a></li><li><a href="global.html#ConnectionState">ConnectionState</a></li><li><a href="global.html#DebugOption">DebugOption</a></li><li><a href="global.html#InitiationProcessedEventType">InitiationProcessedEventType</a></li><li><a href="global.html#MatsSocketCloseCodes">MatsSocketCloseCodes</a></li><li><a href="global.html#MessageEventType">MessageEventType</a></li><li><a href="global.html#MessageType">MessageType</a></li><li><a href="global.html#ReceivedEventType">ReceivedEventType</a></li><li><a href="global.html#SubscriptionEventType">SubscriptionEventType</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Wed Dec 21 2022 12:35:09 GMT+0100 (Central European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

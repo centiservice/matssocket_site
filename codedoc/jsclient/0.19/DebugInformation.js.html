@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: DebugInformation.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: DebugInformation.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>export { DebugInformation, DebugOption }
+
+/**
+ * Meta-information for the call, availability depends on the allowed debug options for the authenticated user,
+ * and which information is requested in client. Notice that Client side and Server side might have wildly differing
+ * ideas of what the time is, which means that timestamps comparison between Server and Client must be evaluated
+ * with massive interpretation.
+ *
+ * @class
+ */
+function DebugInformation(clientMessageSent, requestedDebugOptions, envelope, receivedTimestamp) {
+
+    /**
+     * From client: When the message was sent, millis-from-epoch.
+     * @type {number}
+     */
+    this.clientMessageSent = clientMessageSent;
+    /**
+     * From client: What {@link DebugOption}s (bitfield) was requested by the client of when message was sent.
+     * @type {number}
+     */
+    this.requestedDebugOptions = requestedDebugOptions;
+
+    /**
+     * From server: Description if anything didn't go as expected.
+     * @type {string}
+     */
+    this.description = envelope.desc;
+
+    /**
+     * From server: What {@link DebugOption}s (bitfield) was resolved/given by the server, based on the
+     * {@link DebugInformation#requestedDebugOptions} and authorization.
+     * @type {number}
+     */
+    this.resolvedDebugOptions = 0; // default to 0 if no debug object in the envelope
+
+    /**
+     * From server, only if debug:
+     * @type {number}
+     */
+    this.clientMessageReceived = undefined;
+    this.clientMessageReceivedNodename = undefined;
+
+    this.matsMessageSent = undefined;
+    this.matsMessageReplyReceived = undefined;
+    this.matsMessageReplyReceivedNodename = undefined;
+
+    this.serverMessageCreated = undefined;
+    this.serverMessageCreatedNodename = undefined;
+
+    this.messageSentToClient = undefined;
+    this.messageSentToClientNodename = undefined;
+
+    if (envelope.debug) {
+        this.resolvedDebugOptions = envelope.debug.resd;
+
+        this.clientMessageReceived = envelope.debug.cmrts;
+        this.clientMessageReceivedNodename = envelope.debug.cmrnn;
+
+        this.matsMessageSent = envelope.debug.mmsts;
+        this.matsMessageReplyReceived = envelope.debug.mmrrts;
+        this.matsMessageReplyReceivedNodename = envelope.debug.mmrrnn;
+
+        this.serverMessageCreated = envelope.debug.smcts;
+        this.serverMessageCreatedNodename = envelope.debug.smcnn;
+
+        this.messageSentToClient = envelope.debug.mscts;
+        this.messageSentToClientNodename = envelope.debug.mscnn;
+    }
+
+    this.messageReceived = receivedTimestamp;
+}
+
+/**
+ * &lt;b>Copied directly from AuthenticationPlugin.java&lt;/b>:
+ * Types of debug information you can request, read more at {@link MatsSocket#debug} and {@link MessageEvent#debug}.
+ *
+ * @enum {string}
+ * @readonly
+ */
+const DebugOption = {
+    /**
+     * Timing info of the separate phases. Note that time-skew between different nodes must be taken into account.
+     */
+    TIMESTAMPS: 1, // was 0b0000_0001 (changed due to underscores and possibly binary being a bit too edgy for JS in 2021)
+
+    /**
+     * Node-name of the handling nodes of the separate phases.
+     */
+    NODES: 2, // was 0b0000_0010
+
+    /**
+     * &lt;code>AuthenticationPlugin&lt;/code>-specific "Option A" - this is not used by MatsSocket itself, but can be employed
+     * and given a meaning by the &lt;code>AuthenticationPlugin&lt;/code>.
+     * &lt;p/>
+     * Notice: You might be just as well off by implementing such functionality on the &lt;code>Principal&lt;/code> returned by
+     * the &lt;code>AuthenticationPlugin&lt;/code> ("this user is allowed to request these things") - and on the request DTOs
+     * from the Client ("I would like to request these things").
+     */
+    CUSTOM_A: 64, // was 0b0100_0000
+
+    /**
+     * &lt;code>AuthenticationPlugin&lt;/code>-specific "Option B" - this is not used by MatsSocket itself, but can be employed
+     * and given a meaning by the &lt;code>AuthenticationPlugin&lt;/code>.
+     * &lt;p/>
+     * Notice: You might be just as well off by implementing such functionality on the &lt;code>Principal&lt;/code> returned by
+     * the &lt;code>AuthenticationPlugin&lt;/code> ("this user is allowed to request these things") - and on the request DTOs
+     * from the Client ("I would like to request these things").
+     */
+    CUSTOM_B: 128 // was 0b1000_0000
+};
+Object.freeze(DebugOption);
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AuthorizationRequiredEvent.html">AuthorizationRequiredEvent</a></li><li><a href="ConnectionEvent.html">ConnectionEvent</a></li><li><a href="DebugInformation.html">DebugInformation</a></li><li><a href="ErrorEvent.html">ErrorEvent</a></li><li><a href="InitiationProcessedEvent.html">InitiationProcessedEvent</a></li><li><a href="MatsSocket.html">MatsSocket</a></li><li><a href="MessageEvent.html">MessageEvent</a></li><li><a href="PingPong.html">PingPong</a></li><li><a href="ReceivedEvent.html">ReceivedEvent</a></li><li><a href="SubscriptionEvent.html">SubscriptionEvent</a></li></ul><h3>Global</h3><ul><li><a href="global.html#AuthorizationRequiredEventType">AuthorizationRequiredEventType</a></li><li><a href="global.html#ConnectionEventType">ConnectionEventType</a></li><li><a href="global.html#ConnectionState">ConnectionState</a></li><li><a href="global.html#DebugOption">DebugOption</a></li><li><a href="global.html#InitiationProcessedEventType">InitiationProcessedEventType</a></li><li><a href="global.html#MatsSocketCloseCodes">MatsSocketCloseCodes</a></li><li><a href="global.html#MessageEventType">MessageEventType</a></li><li><a href="global.html#MessageType">MessageType</a></li><li><a href="global.html#ReceivedEventType">ReceivedEventType</a></li><li><a href="global.html#SubscriptionEventType">SubscriptionEventType</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Wed Dec 21 2022 12:35:09 GMT+0100 (Central European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

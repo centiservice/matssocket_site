@@ -1,8 +1,8 @@
 main:
   - title: "Documentation"
     url: /docs/
-  - title: "JavaDoc"
-    url: /javadoc/
+  - title: "CodeDoc"
+    url: /codedoc/
 #  - title: "Posts"
 #    url: /posts/
 #  - title: "Categories"
@@ -20,7 +20,7 @@ docs:
     url: /docs/
   - title: Walkthrough
     children:
-      - title: "Mats<sup>3</sup> over WebSocket"
+      - title: "Mats<sup>3</sup> over WebSocket - WIP"
         url: /docs/mats3-over-websocket/
-      - title: "MatsSocket Clients"
+      - title: "MatsSocket Clients - WIP"
         url: /docs/matssocket-clients/
