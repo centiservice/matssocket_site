@@ -20,7 +20,7 @@ docs:
     url: /docs/
   - title: Walkthrough
     children:
-      - title: "Mats<sup>3</sup> over WebSocket - WIP"
+      - title: "Mats<sup>3</sup> over WebSocket"
         url: /docs/mats3-over-websocket/
-      - title: "MatsSocket Clients - WIP"
+      - title: "MatsSocket Clients"
         url: /docs/matssocket-clients/
