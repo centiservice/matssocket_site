@@ -24,3 +24,5 @@ docs:
         url: /docs/mats3-over-websocket/
       - title: "MatsSocket Clients"
         url: /docs/matssocket-clients/
+      - title: "Explore MatsSocket"
+        url: /docs/explore/

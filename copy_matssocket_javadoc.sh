@@ -13,7 +13,6 @@ matssocketversion="0.19"
 jsclientversion="0.19"
 
 copyJavaDoc() {
-
   variant=$1
 
   if [ "$variant" = "modern" ]; then

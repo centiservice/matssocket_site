@@ -10,10 +10,11 @@ classes: wide
 MatsSocket currently have two clients, one for JavaScript/TypeScript, and one for Dart, working with Flutter.
 
 The Dart client is a manual transpilation of the JavaScript client, and they are identical in functionality
-as far as possible.
+as far as possible. _(Thanks to [Ståle Undheim](https://github.com/staale) for this work, as well as setting up
+test harnesses and testing-at-build for JS and Dart)_
 
 The JavaScript/TypeScript client is found at [npm](https://www.npmjs.com/package/matssocket), and its JSDoc resides
-here.
+[here](/codedoc/jsclient/0.19/MatsSocket.html).
 
 The Dart/Flutter client is found at [pub.dev](https://pub.dev/packages/matssocket).
 
