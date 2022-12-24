@@ -2,8 +2,8 @@
 title: "Explore MatsSocket"
 permalink: /docs/explore/
 excerpt: "How to get your hands dirty with MatsSocket - explore, experiment, investigate, play around"
-created_at: 2022.12.22T14:58
-last_modified_at: 2022.12.22T14:58
+created_at: 2022-12-22T14:58
+last_modified_at: 2022-12-22T14:58
 classes: wide
 ---
 
@@ -20,7 +20,7 @@ MatsSocket connections to the server to test each feature.
 
 So, clone down the repository, and test and build it (you can do that in a container to be on the safer side):
 ```shell
-./gradlew clean check test build
+./gradlew clean test build
 ```
 
 After this works out, you could point your IDE to the Gradle project, and find the `MatsSocketTestServer`. Right-click

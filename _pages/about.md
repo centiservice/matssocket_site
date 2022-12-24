@@ -6,9 +6,9 @@ author_profile: true
 
 MatsSocket is a WebSocket-based client-server solution which bridges the asynchronous message based nature
 of [Mats<sup>3</sup>](https://github.com/centiservice/mats3) all the way out to your end user client applications,
-featuring bidirectional communication. It consists of a small MatsSocketServer API which is implemented on top of the _
-Mats<sup>3</sup> API_ and _JSR 356 Java API for WebSockets_ (which most Servlet Containers implement), as well as client
-libraries - for which there currently exists JavaScript and Dart/Flutter implementations.
+featuring bidirectional communication. It consists of a small MatsSocketServer API which is implemented on top of the
+_Mats<sup>3</sup> API_ and _JSR 356 Java API for WebSockets_ (which most Servlet Containers implement), as well as
+client libraries - for which there currently exists JavaScript and Dart/Flutter implementations.
 
 While it is certainly possible to use Mats with asynchronous HTTP implementations, using e.g. Servlet's or Spring's
 async modes along with the 'MatsFuturizer', the communication is still over synchronous TCP connections. If the
