@@ -1,6 +1,7 @@
 ---
 permalink: /codedoc/
 title: "JavaDoc and JSDoc"
+excerpt: "Extensive JavaDoc and JSDoc for MatsSocket Server and Client."
 toc: true
 ---
 

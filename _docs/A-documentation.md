@@ -1,7 +1,7 @@
 ---
 title: "Documentation"
 permalink: /docs/
-excerpt: "Overview over MatsSocket documentation"
+excerpt: "Overview over MatsSocket Server and Client documentation"
 created_at: 2022-12-15T22:40
 last_modified_at: 2022-12-15T22:40
 toc: true
