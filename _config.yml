@@ -13,14 +13,14 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: MatsSocket
-email: endre@stolsvik.com
+title: "MatsSocket: Mats3 over Websocket"
+masthead_title: MatsSocket
+subtitle: Mats<sup>3</sup> over WebSocket
+logo: /assets/images/MatsSocketLogo.svg
 name: Endre Stølsvik
+email: endre@stolsvik.com
 description: >-
   MatsSocket pulls Mats3 all the way out to the client!
-repository: https://github.com/centiservice/matssocket
-twitter_username: stolsvik
-github_username: stolsvik
 url: https://centiservice.com
 minimal_mistakes_skin: dark
 search: true
@@ -29,18 +29,13 @@ search_full_content: true
 # Localhost development port when using 'serve'
 port: 4001
 
-# EndreXY 2022-08-07: Based on https://github.com/github/pages-gem/issues/399#issuecomment-301827749
-# .. to fix the problem "GitHub Metadata: No GitHub API authentication could be found.
-#     Some fields may be missing or have incorrect data."
-github: [metadata]
-
 # Build settings
 markdown: kramdown
 remote_theme: mmistakes/minimal-mistakes
 # Outputting
 permalink: /:categories/:title/
-paginate: 50 # amount of posts to show
-paginate_path: /page:num/
+#paginate: 50 # amount of posts to show
+#paginate_path: /page:num/
 timezone: Europe/Oslo # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
 include:
@@ -48,18 +43,17 @@ include:
 #  - javadoc
 
 # Exclude from processing.
-# The following items will not be processed, by default. Create a custom list
-# to override the default setting.
-# exclude:
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
 exclude:
   - EndreXY*
+  - copy_*
+  - CNAME
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
 
 # Collections
 collections:
@@ -77,6 +71,24 @@ plugins:
   - jemoji
   - jekyll-include-cache
 
+# Social Sharing
+twitter:
+  username: stolsvik
+og_image: /assets/images/MatsSocketLogo.svg   # Open Graph/Twitter default site image
+# EndreXY 2022-08-07: Based on https://github.com/github/pages-gem/issues/399#issuecomment-301827749
+# .. to fix the problem "GitHub Metadata: No GitHub API authentication could be found.
+#     Some fields may be missing or have incorrect data."
+github: [metadata]
+github_username: stolsvik
+repository: centiservice/matssocket
+# For specifying social profiles
+# - https://developers.google.com/structured-data/customize/social-profiles
+social:
+  type: Organization
+  name: Centiservice
+#  links: # An array of links to social media profiles
+
+
 # Analytics
 analytics:
   provider               : "google-gtag"
@@ -87,7 +99,7 @@ analytics:
 author:
   name   : "Endre Stølsvik"
   avatar : "/assets/images/bio-photo.jpg"
-  bio    : "Creator of Mats3."
+  bio    : "Creator of Mats3 & MatsSocket"
   links:
     - label: "Website"
       icon: "fas fa-fw fa-link"
@@ -97,7 +109,7 @@ author:
       url: "https://twitter.com/stolsvik"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://github.com/centiservice"
+      url: "https://github.com/stolsvik"
 
 footer:
   links:

@@ -1,9 +1,10 @@
 ---
 layout: splash
 permalink: /
+title: MatsSocket
 hidden: true
 header:
-  overlay_color: "#F7420A"
+  overlay_color: "#F75000"
   actions:
     - label: "<i class='fab fa-github'></i> GitHub"
       url: "https://github.com/centiservice/matssocket"
