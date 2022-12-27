@@ -17,8 +17,8 @@ header:
     - label: "Mats<sup>3</sup>"
       url: "https://mats3.io/"
 excerpt: >
-  Mats<sup>3</sup> to the client! Asynchronous RPC using websocket and messages end to end.<br />
-  <small>Java MatsSocketServer API, with client libraries in JavaScript/TS and Dart/Flutter.</small>
+  Mats<sup>3</sup> to the client! Asynchronous RPC using websocket and messages end to end<br />
+  <small>Java MatsSocketServer API, with client libraries in JavaScript/TS and Dart/Flutter</small>
 feature_row:
   - title: "Mats<sup>3</sup> over WebSocket"
     excerpt: "Asynchronous, lightweight, bidirectional client-server over persistent websocket connection."
