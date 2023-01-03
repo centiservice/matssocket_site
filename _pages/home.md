@@ -6,6 +6,8 @@ hidden: true
 header:
   overlay_color: "#F75000"
   actions:
+    - label: "<i class='fa fa-book'></i> <b>Docs</b>"
+      url: "/docs/"
     - label: "<i class='fab fa-github'></i> GitHub"
       url: "https://github.com/centiservice/matssocket"
     - label: "Maven Central"
@@ -14,7 +16,7 @@ header:
       url: "https://www.npmjs.com/package/matssocket"
     - label: "pub.dev"
       url: "https://pub.dev/packages/matssocket"
-    - label: "Mats<sup>3</sup>"
+    - label: "<i class='fa fa-arrow-up'></i> Mats<sup>3</sup>"
       url: "https://mats3.io/"
 excerpt: >
   Mats<sup>3</sup> to the client! Asynchronous RPC using websocket and messages end to end<br />
